@@ -1,3 +1,9 @@
+import { UserButton } from "@clerk/nextjs";
+
 export default () => {
-  return <main></main>;
+  return (
+    <main>
+      <UserButton />
+    </main>
+  );
 };
