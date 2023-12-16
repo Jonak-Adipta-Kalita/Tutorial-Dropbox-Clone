@@ -1,7 +1,7 @@
 type Props = {};
 
 const Header = (props: Props) => {
-  return <header></header>;
+  return <header className="flex items-center justify-between"></header>;
 };
 
 export default Header;
