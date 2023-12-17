@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        host: "links.papareact.com",
+        hostname: "links.papareact.com",
       },
     ],
   },
