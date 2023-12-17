@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "shadcn:add": "shadcn-ui add"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.28.1",
+    "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.298.0",
@@ -25,6 +27,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
+    "shadcn-ui": "^0.4.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
