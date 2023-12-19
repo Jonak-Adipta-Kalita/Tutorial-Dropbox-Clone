@@ -7,7 +7,7 @@ type Props = {};
 
 const Header = ({}: Props) => {
   return (
-    <header className="flex items-center justify-between shadow-lg p-5 lg:max-w-6xl mx-auto rounded-xl">
+    <header className="flex items-center justify-between shadow-lg p-5 rounded-xl">
       <Link href="/" className="flex items-center space-x-2">
         <div className="w-fit rounded-full px">
           <Image
@@ -20,10 +20,12 @@ const Header = ({}: Props) => {
         </div>
         <h1 className="font-bold text-xl">Dropbox</h1>
       </Link>
-      <div>
+      <div className="pr-[5px]">
         <UserButton
           afterSignOutUrl="/"
-          appearance={{ elements: { userButtonAvatarBox: "h-12 w-12" } }}
+          appearance={{
+            elements: { userButtonAvatarBox: "h-12 w-12" },
+          }}
         />
         <SignedOut>
           <SignInButton afterSignInUrl="/dashboard" mode="modal">
