@@ -1,31 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 type Props = {};
 
-const Header = (props: Props) => {
+const Header = ({}: Props) => {
   return (
     <header className="flex items-center justify-between shadow-lg p-5 lg:max-w-6xl mx-auto rounded-xl">
       <Link href="/" className="flex items-center space-x-2">
-        <div className="bg-[#0160FE] w-fit">
+        <div className="w-fit rounded-full px">
           <Image
-            src={"/dropbox.png"}
+            src={"/dropbox.svg"}
             alt="logo"
-            className="invert"
             height={50}
             width={50}
+            className="p-[5px]"
           />
         </div>
         <h1 className="font-bold text-xl">Dropbox</h1>
       </Link>
-      <div className="flex space-x-2 items-center">
+      <div>
         <UserButton
           afterSignOutUrl="/"
           appearance={{ elements: { userButtonAvatarBox: "h-12 w-12" } }}
         />
         <SignedOut>
-          <SignInButton afterSignInUrl="/dashboard" mode="modal" />
+          <SignInButton afterSignInUrl="/dashboard" mode="modal">
+            <Button variant="secondary">Sign in</Button>
+          </SignInButton>
         </SignedOut>
       </div>
     </header>
