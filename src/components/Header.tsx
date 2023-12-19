@@ -12,15 +12,18 @@ const Header = (props: Props) => {
           <Image
             src={"/dropbox.png"}
             alt="logo"
-            className="invert rounded-full"
+            className="invert"
             height={50}
             width={50}
           />
         </div>
         <h1 className="font-bold text-xl">Dropbox</h1>
       </Link>
-      <div className="px-5 flex space-x-2 items-center">
-        <UserButton afterSignOutUrl="/" />
+      <div className="flex space-x-2 items-center">
+        <UserButton
+          afterSignOutUrl="/"
+          appearance={{ elements: { userButtonAvatarBox: "h-12 w-12" } }}
+        />
         <SignedOut>
           <SignInButton afterSignInUrl="/dashboard" mode="modal" />
         </SignedOut>
