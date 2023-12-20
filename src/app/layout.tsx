@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import "../globals.css";
 import Header from "@/components/Header";
+import Disclaimer from "@/components/Disclaimer";
 
 export const metadata: Metadata = {
   title: "JAK Dropbox Clone",
@@ -16,9 +17,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>
+        <body className="">
           <Header />
           {children}
+          <Disclaimer />
         </body>
       </html>
     </ClerkProvider>
