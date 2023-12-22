@@ -6,12 +6,11 @@ export default () => {
   return (
     <div className="flex flex-col lg:flex-row items-center">
       <div className="p-10 flex flex-col text-grey-800 space-y-5">
-        <h1 className="text-5xl font-bold">
-          Welcome to Dropbox. <br />
-          <br />
-          Storing everything for you and your business needs. All in one place
+        <h1 className="text-4xl xl:text-5xl font-bold">
+          Welcome to{" "}
+          <span className="underline decoration-slate-500">Dropbox</span>
         </h1>
-        <p>
+        <p className="font-semibold text-justify">
           Enhance your personal storage with Dropbox, offering a simple and
           efficient way to upload, organize, and access files from anywhere.
           Securely store important documents and media, and experience the
