@@ -7,7 +7,7 @@ type Props = {};
 
 const Header = ({}: Props) => {
   return (
-    <header className="flex items-center justify-between shadow-lg p-5 rounded-xl">
+    <header className="flex items-center justify-between shadow-lg p-5 rounded-xl z-50">
       <Link href="/" className="flex items-center space-x-2">
         <div className="w-fit rounded-full px">
           <Image
