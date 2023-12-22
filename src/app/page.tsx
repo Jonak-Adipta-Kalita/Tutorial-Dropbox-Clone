@@ -4,10 +4,11 @@ import Link from "next/link";
 
 export default () => {
   return (
-    <div>
+    <div className="flex flex-col lg:flex-row items-center">
       <div className="p-10 flex flex-col text-grey-800 space-y-5">
         <h1 className="text-5xl font-bold">
           Welcome to Dropbox. <br />
+          <br />
           Storing everything for you and your business needs. All in one place
         </h1>
         <p>
@@ -24,7 +25,12 @@ export default () => {
           </Link>
         </Button>
       </div>
-      <div></div>
+      <div className="bg-white h-full p-10">
+        <video autoPlay loop muted className="rounded-lg">
+          <source src="/demo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   );
 };
