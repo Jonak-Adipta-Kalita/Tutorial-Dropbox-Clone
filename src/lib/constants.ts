@@ -6,4 +6,6 @@ export const COLOR_EXTENSION_MAP: { [key: string]: string } = {
   pptx: "#D04500",
   xls: "#217346",
   xlsx: "#217346",
+  txt: "#FFFFFF",
+  json: "#FFFF00",
 };
