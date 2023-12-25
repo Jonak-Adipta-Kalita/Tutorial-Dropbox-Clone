@@ -1,4 +1,3 @@
-import HomeVideo from "@/components/HomeVideo";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -25,7 +24,12 @@ export default () => {
           </Link>
         </Button>
       </div>
-      <HomeVideo />
+      <div className="bg-white h-full p-10">
+        <video autoPlay loop muted className="rounded-lg">
+          <source src="/demo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   );
 };
