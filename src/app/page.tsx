@@ -30,6 +30,7 @@ export default () => {
           Your browser does not support the video tag.
         </video>
       </div>
+      {/* TODO: Skeleton Loader for Video */}
     </div>
   );
 };
