@@ -5,6 +5,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import prettyBytes from "pretty-bytes";
 import { DefaultExtensionType, FileIcon, defaultStyles } from "react-file-icon";
 import { COLOR_EXTENSION_MAP } from "@/lib/constants";
+import { openRenameModal } from "@/lib/utils";
+import { PencilIcon } from "lucide-react";
 
 export const columns: ColumnDef<FileType>[] = [
   {
@@ -30,10 +32,37 @@ export const columns: ColumnDef<FileType>[] = [
   {
     accessorKey: "file.fileName",
     header: "Name",
+    cell: ({ renderValue, row, ...props }) => {
+      return (
+        <p
+          onClick={() =>
+            openRenameModal(
+              (row.original as FileType).id,
+              (row.original as FileType).file.fileName
+            )
+          }
+          className="underline flex items-center text-blue-500 hover:cursor-pointer"
+        >
+          {renderValue() as string} <PencilIcon size={15} className="ml-2" />
+        </p>
+      );
+    },
   },
   {
     accessorKey: "timestamp",
     header: "Date Added",
+    cell: ({ renderValue, ...props }) => {
+      return (
+        <div className="flex flex-col">
+          <div className="text-sm">
+            {(renderValue() as Date).toLocaleDateString()}
+          </div>
+          <div className="text-xs text-gray-500">
+            {(renderValue() as Date).toLocaleTimeString()}
+          </div>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "file.size",

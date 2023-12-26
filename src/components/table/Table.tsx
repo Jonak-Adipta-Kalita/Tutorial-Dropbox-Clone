@@ -17,7 +17,8 @@ import {
 } from "@/components/ui/table";
 import { FileType } from "@/typings";
 import { Button } from "../ui/button";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
+import { openDeleteModal } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -33,9 +34,6 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
-  const openDeleteModal = (id: string) => {};
-  const openRenameModal = (id: string, fileName: string) => {};
 
   return (
     <div className="rounded-md border">
@@ -67,31 +65,7 @@ export function DataTable<TData, TValue>({
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
-                    {cell.column.id === "timestamp" ? (
-                      <div className="flex flex-col">
-                        <div className="text-sm">
-                          {(cell.getValue() as Date).toLocaleDateString()}
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          {(cell.getValue() as Date).toLocaleTimeString()}
-                        </div>
-                      </div>
-                    ) : cell.column.id === "file.fileName" ? (
-                      <p
-                        onClick={() =>
-                          openRenameModal(
-                            (row.original as FileType).id,
-                            (row.original as FileType).file.fileName
-                          )
-                        }
-                        className="underline flex items-center text-blue-500 hover:cursor-pointer"
-                      >
-                        {cell.getValue() as string}{" "}
-                        <PencilIcon size={15} className="ml-2" />
-                      </p>
-                    ) : (
-                      flexRender(cell.column.columnDef.cell, cell.getContext())
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
                 <TableCell key={(row.original as FileType).id}>
