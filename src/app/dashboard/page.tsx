@@ -28,11 +28,11 @@ const DashboardPage = async (props: Props) => {
   }));
 
   return (
-    <div className="border-t">
+    <div className="border-t space-y-10">
       <Dropzone />
 
       <section className="container space-y-5">
-        <h2 className="font-bold">All Files</h2>
+        <h1 className="font-bold text-xl">All Files</h1>
         <div>
           <TableWrapper skeletonFiles={skeletonFiles} />
         </div>
