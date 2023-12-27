@@ -5,8 +5,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import prettyBytes from "pretty-bytes";
 import { DefaultExtensionType, FileIcon, defaultStyles } from "react-file-icon";
 import { COLOR_EXTENSION_MAP } from "@/lib/constants";
-import { openRenameModal } from "@/lib/utils";
 import { PencilIcon } from "lucide-react";
+import { useAppStore } from "@/store/store";
 
 export const columns: ColumnDef<FileType>[] = [
   {
@@ -33,6 +33,14 @@ export const columns: ColumnDef<FileType>[] = [
     accessorKey: "file.fileName",
     header: "Name",
     cell: ({ renderValue, row, ...props }) => {
+      const { setFileId, setFileName, setIsModalOpen } = useAppStore();
+
+      const openRenameModal = (id: string, fileName: string) => {
+        setFileId(id);
+        setFileName(fileName);
+        setIsModalOpen("rename");
+      };
+
       return (
         <p
           onClick={() =>

@@ -18,7 +18,7 @@ import {
 import { FileType } from "@/typings";
 import { Button } from "../ui/button";
 import { TrashIcon } from "lucide-react";
-import { openDeleteModal } from "@/lib/utils";
+import { useAppStore } from "@/store/store";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,6 +34,12 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+  const { setFileId, setIsModalOpen } = useAppStore();
+
+  const openDeleteModal = (id: string) => {
+    setFileId(id);
+    setIsModalOpen("delete");
+  };
 
   return (
     <div className="rounded-md border">
