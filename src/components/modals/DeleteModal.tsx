@@ -8,11 +8,30 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { db, storage } from "@/lib/firebase";
 import { useAppStore } from "@/store/store";
+import { useUser } from "@clerk/nextjs";
+import { deleteDoc, doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 
 export default () => {
-  const { setIsModalOpen, isModalOpen } = useAppStore();
-  const deleteFile = async () => {};
+  const { setIsModalOpen, isModalOpen, fileId } = useAppStore();
+  const { user } = useUser();
+
+  const deleteFile = async () => {
+    if (!user || !fileId) return;
+
+    const fileRef = ref(storage, `users/${user.id}/files/${fileId}`);
+
+    try {
+      await deleteObject(fileRef);
+      await deleteDoc(doc(db, "users", user.id, "files", fileId));
+    } catch (err: any) {
+      alert(err.message);
+    } finally {
+      setIsModalOpen(null);
+    }
+  };
 
   return (
     <Dialog
