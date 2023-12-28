@@ -41,7 +41,7 @@ const TableWrapper = ({ skeletonFiles }: Props) => {
         size: doc.data().file.size,
         downloadURL: doc.data().file.downloadURL,
       },
-      timestamp: new Date(doc.data().timestamp.seconds * 1000) || undefined,
+      timestamp: new Date(doc.data().timestamp * 1000) || undefined,
     }));
 
     setInitialFiles(files);
