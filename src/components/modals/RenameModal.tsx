@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -34,6 +34,10 @@ export default () => {
     setIsModalOpen(null);
   };
 
+  useEffect(() => {
+    setInput(fileName);
+  }, [fileName]);
+
   return (
     <Dialog
       open={isModalOpen === "rename"}
@@ -53,13 +57,17 @@ export default () => {
                 renameFile();
               }
             }}
+            className="w-full"
           />
           <div className="flex justify-end space-x-2 py-3">
             <Button
               size={"sm"}
               className="px-3"
               variant={"ghost"}
-              onClick={() => setIsModalOpen(null)}
+              onClick={() => {
+                setInput("");
+                setIsModalOpen(null);
+              }}
             >
               <span className="sr-only">Cancel</span>
               <span>Cancel</span>
