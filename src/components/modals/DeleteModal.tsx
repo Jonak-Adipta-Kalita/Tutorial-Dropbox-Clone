@@ -60,6 +60,7 @@ export default () => {
           </Button>
           <Button
             className="px-3 flex-1"
+            variant={"destructive"}
             type="submit"
             size={"sm"}
             onClick={() => deleteFile()}
