@@ -13,22 +13,39 @@ import { useUser } from "@clerk/nextjs";
 import { Input } from "../ui/input";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { useToast } from "../ui/use-toast";
 
 export default () => {
   const { setIsModalOpen, isModalOpen, fileId, fileName } = useAppStore();
   const [input, setInput] = useState(fileName);
   const { user } = useUser();
+  const { toast } = useToast();
 
   const renameFile = async () => {
     if (!user || !fileId) return;
 
-    await setDoc(
-      doc(db, "users", user.id, "files", fileId),
-      {
-        file: { fileName: input },
-      },
-      { merge: true }
-    );
+    const renamingToast = toast({ description: "Renaming..." });
+
+    try {
+      await setDoc(
+        doc(db, "users", user.id, "files", fileId),
+        {
+          file: { fileName: input },
+        },
+        { merge: true }
+      );
+
+      renamingToast.update({
+        description: "Renamed Successfully!",
+        id: renamingToast.id,
+      });
+    } catch (err: any) {
+      renamingToast.update({
+        title: "Failed to Rename!",
+        description: err.message,
+        id: renamingToast.id,
+      });
+    }
 
     setInput("");
     setIsModalOpen(null);
@@ -78,6 +95,7 @@ export default () => {
               size={"sm"}
               onClick={() => renameFile()}
               variant={"destructive"}
+              disabled={input === ""}
             >
               <span className="sr-only">Rename</span>
               <span>Rename</span>
