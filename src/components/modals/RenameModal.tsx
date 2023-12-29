@@ -13,6 +13,7 @@ import { useUser } from "@clerk/nextjs";
 import { Input } from "../ui/input";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import toast from "react-hot-toast";
 
 export default () => {
   const { setIsModalOpen, isModalOpen, fileId, fileName } = useAppStore();
@@ -22,6 +23,8 @@ export default () => {
   const renameFile = async () => {
     if (!user || !fileId) return;
 
+    const toastId = toast.loading("Renaming File...");
+
     try {
       await setDoc(
         doc(db, "users", user.id, "files", fileId),
@@ -30,7 +33,11 @@ export default () => {
         },
         { merge: true }
       );
-    } catch (err: any) {}
+
+      toast.success("File Renamed!", { id: toastId });
+    } catch (err: any) {
+      toast.error(`Error: ${err.message}`, { id: toastId });
+    }
 
     setInput("");
     setIsModalOpen(null);
