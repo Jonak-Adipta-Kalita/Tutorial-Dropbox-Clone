@@ -13,6 +13,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import toast from "react-hot-toast";
 
 export default () => {
   const [loading, setLoading] = useState(false);
@@ -38,23 +39,25 @@ export default () => {
     if (!user) return;
 
     setLoading(true);
+    const toastId = toast.loading("Uploading File...");
 
-    const docRef = await addDoc(collection(db, "users", user.id, "files"), {
-      user: {
-        id: user.id,
-        fullName: user.fullName,
-        profileImg: user.imageUrl,
-      },
-      file: {
-        fileName: selectedFile.name,
-        type: selectedFile.type,
-        size: selectedFile.size,
-      },
-      timestamp: serverTimestamp(),
-    });
+    try {
+      const docRef = await addDoc(collection(db, "users", user.id, "files"), {
+        user: {
+          id: user.id,
+          fullName: user.fullName,
+          profileImg: user.imageUrl,
+        },
+        file: {
+          fileName: selectedFile.name,
+          type: selectedFile.type,
+          size: selectedFile.size,
+        },
+        timestamp: serverTimestamp(),
+      });
 
-    const imageRef = ref(storage, `users/${user.id}/files/${docRef.id}`);
-    uploadBytes(imageRef, selectedFile).then(async () => {
+      const imageRef = ref(storage, `users/${user.id}/files/${docRef.id}`);
+      await uploadBytes(imageRef, selectedFile);
       const downloadURL = await getDownloadURL(imageRef);
 
       await setDoc(
@@ -64,9 +67,13 @@ export default () => {
         },
         { merge: true }
       );
-    });
 
-    setLoading(false);
+      toast.success("File Uploaded!", { id: toastId });
+    } catch (err: any) {
+      toast.error(`Error: ${err.message}`, { id: toastId });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
