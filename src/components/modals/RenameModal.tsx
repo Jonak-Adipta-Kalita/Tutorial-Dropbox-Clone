@@ -38,12 +38,14 @@ export default () => {
       renamingToast.update({
         description: "Renamed Successfully!",
         id: renamingToast.id,
+        variant: "success",
       });
     } catch (err: any) {
       renamingToast.update({
         title: "Failed to Rename!",
         description: err.message,
         id: renamingToast.id,
+        variant: "destructive",
       });
     }
 
