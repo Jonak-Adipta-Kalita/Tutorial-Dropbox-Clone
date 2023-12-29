@@ -13,18 +13,14 @@ import { useUser } from "@clerk/nextjs";
 import { Input } from "../ui/input";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { useToast } from "../ui/use-toast";
 
 export default () => {
   const { setIsModalOpen, isModalOpen, fileId, fileName } = useAppStore();
   const [input, setInput] = useState(fileName);
   const { user } = useUser();
-  const { toast } = useToast();
 
   const renameFile = async () => {
     if (!user || !fileId) return;
-
-    const renamingToast = toast({ description: "Renaming..." });
 
     try {
       await setDoc(
@@ -34,20 +30,7 @@ export default () => {
         },
         { merge: true }
       );
-
-      renamingToast.update({
-        description: "Renamed Successfully!",
-        id: renamingToast.id,
-        variant: "success",
-      });
-    } catch (err: any) {
-      renamingToast.update({
-        title: "Failed to Rename!",
-        description: err.message,
-        id: renamingToast.id,
-        variant: "destructive",
-      });
-    }
+    } catch (err: any) {}
 
     setInput("");
     setIsModalOpen(null);
