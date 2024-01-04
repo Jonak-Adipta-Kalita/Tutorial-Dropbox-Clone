@@ -17,7 +17,6 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        {/* TODO: Custom Scrollbar Style */}
         <body className="flex flex-col h-screen">
           <Header />
           <main className="flex-1 overflow-y-auto">
